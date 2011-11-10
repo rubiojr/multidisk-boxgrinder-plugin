@@ -10,7 +10,12 @@ Needs VirtualBox installed to convert from VMDK Sparse to VMDK StreamOptimized.
 
 ## Usage
 
-    boxgrinder-build -p multidisk my-appliance.appl -l multidisk-boxgrinder-plugin
+    boxgrinder-build -p multidisk f15-jeos.appl -l multidisk-boxgrinder-plugin
+    
+After the build has finished, you'll find the additional disk formats under build/appliances/x86_64/fedora/15/f15-jeos/1.0/multidisk-plugin
+
+    $ ls build/appliances/x86_64/fedora/15/f15-jeos/1.0/multidisk-plugin/
+    f15-jeos-compressed.qcow2  f15-jeos-sparse.qcow2  f15-jeos-sparse.vmdk  f15-jeos-streamoptimized.vmdk
 
 ## Copyright
 
