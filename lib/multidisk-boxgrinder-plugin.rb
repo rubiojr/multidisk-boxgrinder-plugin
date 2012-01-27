@@ -24,8 +24,12 @@ module BoxGrinder
       @log.info "Converting to QCow2 Compressed Sparse using qemu-img..."
       @exec_helper.execute "qemu-img convert -c -O qcow2 '#{@previous_deliverables.disk}' '#{@deliverables.qcow_compressed}'"
 
-      @log.info "Using VBoxManage to convert the image..."
-      @exec_helper.execute "VBoxManage clonehd --format VMDK --variant Stream '#{@deliverables.vmdk_sparse}' '#{@deliverables.vmdk_stream}'"
+      if `which VBoxManage`.empty?
+        @log.error "VBoxManage binary not found in your path, skipping VMDK Stream format."
+      else
+        @log.info "Using VBoxManage to convert the image..."
+        @exec_helper.execute "VBoxManage clonehd --format VMDK --variant Stream '#{@deliverables.vmdk_sparse}' '#{@deliverables.vmdk_stream}'"
+      end
 
       @log.info "Conversions done."
     end
