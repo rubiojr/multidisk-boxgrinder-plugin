@@ -3,6 +3,7 @@ require 'boxgrinder-build/plugins/base-plugin'
 module BoxGrinder
 
   class MultiDiskPlugin < BasePlugin
+    plugin :type => :platform, :name => :multidisk, :full_name  => "Multi Disk"
 
     def after_init
       register_deliverable(:vmdk_sparse => "#{@appliance_config.name}-sparse.vmdk")
