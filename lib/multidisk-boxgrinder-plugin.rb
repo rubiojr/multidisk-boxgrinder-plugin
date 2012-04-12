@@ -7,10 +7,12 @@ module BoxGrinder
 
     def after_init
       register_deliverable(:vmdk_sparse => "#{@appliance_config.name}-sparse.vmdk")
-      register_deliverable(:vmdk_stream => "#{@appliance_config.name}-streamoptimized.vmdk")
-      register_deliverable(:vhd => "#{@appliance_config.name}.vhd")
       register_deliverable(:qcow_sparse => "#{@appliance_config.name}-sparse.qcow2")
       register_deliverable(:qcow_compressed => "#{@appliance_config.name}-compressed.qcow2")
+      if !`which VBoxManage`.empty?
+        register_deliverable(:vmdk_stream => "#{@appliance_config.name}-streamoptimized.vmdk")
+        register_deliverable(:vhd => "#{@appliance_config.name}.vhd")
+      end
     end
 
     def execute
